@@ -139,8 +139,8 @@ class SMPL(nn.Module):
                 smpl_path)
 
             with open(smpl_path, 'rb') as smpl_file:
-                data_struct = Struct(**pickle.load(smpl_file,
-                                                   encoding='latin1'))
+                data = pickle.load(smpl_file, encoding='latin1')
+                data_struct = Struct(**data)
 
         super(SMPL, self).__init__()
         self.batch_size = batch_size
@@ -152,6 +152,10 @@ class SMPL(nn.Module):
                   f'self.SHAPE_SPACE_DIM={self.SHAPE_SPACE_DIM}')
             num_betas = min(num_betas, shapedirs.shape[-1])
         else:
+            print(f'INFORMATION: You are using a {self.name()} model, with'
+                  f' {shapedirs.shape[-1]} shape coefficients.\n'
+                  f'num_betas={num_betas}, shapedirs.shape={shapedirs.shape}, '
+                  f'self.SHAPE_SPACE_DIM={self.SHAPE_SPACE_DIM}')
             num_betas = min(num_betas, self.SHAPE_SPACE_DIM)
 
         if self.age == 'kid':

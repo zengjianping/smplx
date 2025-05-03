@@ -399,7 +399,7 @@ def batch_rigid_transform(
 
     joints_homogen = F.pad(joints, [0, 0, 0, 1])
 
-    rel_transforms = transforms - F.pad(
-        torch.matmul(transforms, joints_homogen), [3, 0, 0, 0, 0, 0, 0, 0])
+    transformed_joints_homo = torch.matmul(transforms, joints_homogen)
+    rel_transforms = transforms - F.pad(transformed_joints_homo, [3, 0, 0, 0, 0, 0, 0, 0])
 
     return posed_joints, rel_transforms

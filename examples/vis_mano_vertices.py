@@ -39,7 +39,7 @@ def main(model_folder, corr_fname, ext='npz',
             hand_idxs = idxs_data[f'{hand}_hand']
 
     model = smplx.create(model_folder, model_type='smplx',
-                         gender=gender,
+                         gender=gender, num_betas=10,
                          ext=ext)
     betas = torch.zeros([1, 10], dtype=torch.float32)
     expression = torch.zeros([1, 10], dtype=torch.float32)

@@ -32,7 +32,7 @@ def main(model_folder, corr_fname, ext='npz',
     head_idxs = np.load(corr_fname)
 
     model = smplx.create(model_folder, model_type='smplx',
-                         gender=gender,
+                         gender=gender, num_betas=10,
                          ext=ext)
     betas = torch.zeros([1, 10], dtype=torch.float32)
     expression = torch.zeros([1, 10], dtype=torch.float32)
